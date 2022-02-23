@@ -1,0 +1,175 @@
+        /* 1 задание */
+.oneTaskWrapper{                /* родитель */
+    width: 600px;
+    height: 60px;
+    background-color: blanchedalmond;
+    position: relative;
+}
+#track{                         /* дорожка */
+    position: absolute;
+    width: 560px;
+    height: 20px;
+    background-color: rgb(155, 152, 152);
+    top: 20px;
+    left: 20px;
+}
+#cursor{                        /* указатель */
+    position: absolute;
+    top: 15px; 
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    left: 20px;
+}
+/* 2 задание */
+.twoTaskWrapper{
+    position: relative;
+    background-color: rgb(230, 231, 186);
+    width: 800px;
+    height: 400px;
+}
+#leftButton{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    font-size: 300%;
+    font-weight: 600;
+    color: rgb(83, 82, 55);
+    border-radius: 5px;
+    top: 160px;
+    left: 10px;
+    border: none;
+    background-color: rgb(230, 231, 186);
+}
+#gallery{
+    position: absolute;
+    background-image:url(./image/1.jfif);
+    background-size: 100% 100%;
+    width: 640px;
+    height: 380px;
+    top: 10px;
+    left: 80px;
+    border-radius: 5px;
+}
+#rightButton{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    font-size: 300%;
+    font-weight: 600;
+    color: rgb(83, 82, 55);
+    border-radius: 5px;
+    top: 160px;
+    right: 10px;
+    border: none;
+    background-color: rgb(230, 231, 186);
+}
+/* 3 задание */
+.treeTaskWrapper{
+    background-color: cadetblue;
+    border: solid 1px black;
+}
+.directory{
+    background-color: darkblue;
+    border: solid 1px black;
+    color: white;
+}
+.content{
+    background-color: darkgrey;
+    padding: 3px;
+}
+#content1{
+    display: none;
+}
+#content2{
+    display: none;
+}
+#content3{
+    display: none;
+}
+#content4{
+    display: none;
+}
+/* 4 задание */
+#fourTaskWrapper{
+    background-color: rgb(42, 121, 84);
+    border: solid 1px black;
+    width: 500px;
+}
+.news{
+    padding: 30px;
+    padding-top: 10px;
+    margin: 10px;
+}
+h4{
+    margin: 0;
+}
+p{
+    margin: 0;
+}
+/* 5 задание */
+#generate{
+    width: 302px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.wrapperInput{
+    padding: 5px;
+}
+.inputYearMonth{
+    width: 99px;
+}
+.table{
+    text-align: center;
+    vertical-align: middle;
+    border-collapse: collapse;
+}
+.th{
+    background-color: rgb(158, 158, 241);
+    border: solid 1px rgb(158, 158, 241);
+    height: 30px;
+    width: 40px;
+}
+.td{
+    background-color: rgb(249, 250, 221);
+    border: solid 1px rgb(145, 145, 243);;
+}
+
+/* 6 задание */
+.link{
+    text-decoration: none;
+}
+/* 7 задание */
+/* 8 задание */
+#div9exercise{
+    width: 400px;
+    height: 300px;
+    background-color: rgb(230, 230, 245);
+    border: solid 1px rgb(63, 63, 146);
+}
+#textarea9exercise{
+    width: 396px;
+    height: 296px;
+    background-color: rgb(230, 230, 245);
+    border: solid 1px rgb(63, 63, 146);
+    display: none;
+}
+/* 9 задание */   
+#people{
+    text-align: center;
+    vertical-align: middle;
+    border-collapse: collapse;
+    font-size: 150%;
+}
+.heading{
+    background-color: rgb(37, 37, 245);
+    border: solid 1px rgb(158, 158, 241);
+    height: 70px;
+    width: 150px;
+    color: white;
+}
+.cellsTab{
+    background-color: rgb(249, 250, 221);
+    border: solid 1px rgb(145, 145, 243);
+    height: 70px;
+}

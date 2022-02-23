@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Задание 1 -->
+<h3>
+    Задание 1: <br>
+    Создать html-страницу с трекбаром. Предоставить пользователю возможность изменять положение синего указателя.
+</h3>
+<div class="oneTaskWrapper">    
+    <div id="track"></div>
+    <div id="cursor"></div>
+</div>
+<script type="text/javascript">
+    let resize = false;                                                     //создаем переменную, содержащую информацию: нажата ли кнопка мыши(изначально - не нажата)
+    cursor.addEventListener("mousedown",function(e){console.log(e.pageX);   //при нажатии кнопки мыши меняем значение переменной resize на true, если (e.pageX >= 22) && (e.pageX <= 587)
+        if((e.pageX >= 22) && (e.pageX <= 587)) {resize = true}; 
+     })	
+    document.addEventListener("mouseup",function(){ resize = false })	//при отпускании кнопки мыши меняем значение переменной resize на false
+    document.addEventListener("mousemove",function(e){ 					//функция движения мыши
+        let elementCursor = document.getElementById('cursor');          //получаем доступ к элементу с id = 'cursor'
+        let cursorStyle = getComputedStyle(elementCursor);              //обращаемся к стилям найденого элемента
+        if((e.pageX >= 22) && (e.pageX <= 587) && resize){              //если resize == true,
+            cursor.style.left = (e.pageX - 22) + "px";                  //меняем стили height и width в соответствии с координатой курсора мыши
+	    }
+        else if (e.pageX > 587) {                                       //если курсор за пределами то возвращаем бегунок в крайнее положение
+                        cursor.style.left = 550 + "px";
+                    } else if (e.pageX < 22) {
+                            cursor.style.left = 20 + "px";
+                            }
+    })    
+</script>
+
+<h3>Задание 2<br>
+    Создать html-страницу с галереей.
+    В один момент времени на экране отображается одно изображение
+    и две кнопки: Назад и Вперед. При нажатии на кнопки
+    изображения должны переключатся в указанном порядке. Когда
+    следующего/предыдущего изображения нет, то соответствующую
+    кнопку необходимо блокировать. Изображения хранить в заранее
+    подготовленном массиве.    
+</h3>
+<div class="twoTaskWrapper">
+    <input id="leftButton" type="button" value="&#60;" onclick="back(event)">    
+    <div id="gallery"></div>
+    <input id="rightButton" type="button" value="&#62;" onclick="forward(event)">
+</div>
+<script type="text/javascript">
+    let imageArray = ["./image/1.jfif", "./image/2.jfif", "./image/3.jfif", "./image/4.jfif", "./image/5.jfif", "./image/6.jfif", "./image/7.jfif"];
+    function back(e) {
+        let img = document.getElementById("gallery");           //получаем доступ к элементу с id = "gallery"
+        let imgStyle = getComputedStyle(img);                   //обращаемся к стилям найденого элемента
+        let imageUrl = imgStyle.backgroundImage                 //находим url картинки на экране
+        let imageNumber = +decodeURI(imageUrl.substring(imageUrl.lastIndexOf('/')+1,imageUrl.length)).replace(/[^\d]/g, ''); //из url извлекаем порядковый номер картинки на экране 
+        if (imageNumber > 1 ) {
+            img.style.backgroundImage = `url(./image/${imageNumber - 1}.jfif)`
+        } else if (imageNumber == 1) {
+            img.style.backgroundImage = `url(./image/1.jfif)`
+        }
+    }
+    function forward(e) {
+        let img = document.getElementById("gallery");           //получаем доступ к элементу с id = "gallery"
+        let imgStyle = getComputedStyle(img);                   //обращаемся к стилям найденого элемента
+        let imageUrl = imgStyle.backgroundImage                 //находим url картинки на экране
+        let imageNumber = +decodeURI(imageUrl.substring(imageUrl.lastIndexOf('/')+1,imageUrl.length)).replace(/[^\d]/g, ''); //из url извлекаем порядковый номер картинки на экране 
+        if (imageNumber < imageArray.length) {
+            img.style.backgroundImage = `url(./image/${imageNumber + 1}.jfif)`
+        } else if (imageNumber == imageArray.length){
+            img.style.backgroundImage = `url(./image/${imageNumber}.jfif)`
+        }
+    }  
+        
+</script> 
+
+<h3>
+    Задание 3 <br>
+    Создать html-страницу с блоками информации, которые открываются по щелчку на заголовок. 
+    В один момент времени может быть развернут только один блок информации.
+</h3>
+<div class="treeTaskWrapper">
+    <div class="directory" onclick="directorySelection(event, 1)">Lorem ipsum dolor sit amet consectetur.</div>
+    <div id="content1" class="content">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque mollitia delectus cupiditate fuga qui laudantium. Natus nihil eum quisquam provident doloremque consectetur ullam esse aspernatur distinctio neque? Commodi, pariatur quas.
+        Quia ducimus non error harum similique inventore iusto corrupti repellendus provident nihil! Magnam sunt similique quasi aut hic, eveniet labore! Ipsa ipsam odio doloremque iure sunt nesciunt soluta aliquid culpa.
+    </div>
+    <div class="directory" onclick="directorySelection(event, 2)">Lorem ipsum dolor sit amet consectetur.</div>
+    <div id="content2" class="content">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque mollitia delectus cupiditate fuga qui laudantium. Natus nihil eum quisquam provident doloremque consectetur ullam esse aspernatur distinctio neque? Commodi, pariatur quas.
+        Quia ducimus non error harum similique inventore iusto corrupti repellendus provident nihil! Magnam sunt similique quasi aut hic, eveniet labore! Ipsa ipsam odio doloremque iure sunt nesciunt soluta aliquid culpa.
+    </div>
+    <div class="directory" onclick="directorySelection(event, 3)">Lorem ipsum dolor sit amet consectetur.</div>
+    <div id="content3" class="content">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque mollitia delectus cupiditate fuga qui laudantium. Natus nihil eum quisquam provident doloremque consectetur ullam esse aspernatur distinctio neque? Commodi, pariatur quas.
+        Quia ducimus non error harum similique inventore iusto corrupti repellendus provident nihil! Magnam sunt similique quasi aut hic, eveniet labore! Ipsa ipsam odio doloremque iure sunt nesciunt soluta aliquid culpa.
+    </div>
+    <div class="directory" onclick="directorySelection(event, 4)">Lorem ipsum dolor sit amet consectetur.</div>
+    <div id="content4" class="content">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque mollitia delectus cupiditate fuga qui laudantium. Natus nihil eum quisquam provident doloremque consectetur ullam esse aspernatur distinctio neque? Commodi, pariatur quas.
+        Quia ducimus non error harum similique inventore iusto corrupti repellendus provident nihil! Magnam sunt similique quasi aut hic, eveniet labore! Ipsa ipsam odio doloremque iure sunt nesciunt soluta aliquid culpa.
+    </div>
+</div>
+<script>    
+    function directorySelection(e, num) {
+        let directoryContent = document.getElementById(`content${num}`);        //получаем доступ к элементу с нужным id
+        let directoryStyle = getComputedStyle(directoryContent);                //обращаемся к стилям найденого элемента                                                                                
+        const numberOfLines = document.querySelectorAll('div.content');         //находим колличество директорий
+        if (directoryStyle.display == "none") {                                 //если директория закрыта, открываем ее
+            for (let i = 0; i < numberOfLines.length; i++) {                    //Закрываем все открытые директории
+                let takeEverything = document.getElementById(`content${i+1}`);  
+                takeEverything.style = `display: none;`;                             
+            }
+            directoryContent.style = `display: block;`;                         //делаем контент видимым
+        } else if (directoryStyle.display == "block") {                         //если директория открыта, закрываем ее            
+            for (let i = 0; i < numberOfLines.length; i++) {                    //Закрываем все открытые директории
+                let takeEverything = document.getElementById(`content${i+1}`);     
+                takeEverything.style = `display: none;`;             
+            }
+            directoryContent.style = `display: none;`;                         //если директория открыта, закрываем ее
+        }                        
+    }     
+</script>
+
+<h2>
+    Задание 4 <br> отдельный файл scroll.html
+</h2> 
+
+
+<h3>
+Задание 5 <br>
+Создать html-страницу, на которой пользователь может ввести номер месяца,
+год, и получить календарь на указанный месяц.
+Календарь можно генерировать с помощью таблицы. Начальный
+день недели всегда должен быть понедельник.
+</h3>
+<div class="wrapperInput">
+    <p>введите месяц и год цифрой</p>
+    <label for="">Month
+        <input  id="fiveTaskInput1" class="inputYearMonth" type="text" onkeyup="this.value = this.value.replace(/[^\d]/g,'');">         <!-- вводим месяц -->  
+    </label>
+    <label for="">Year
+        <input  id="fiveTaskInput2" class="inputYearMonth" type="text" onkeyup="this.value = this.value.replace(/[^\d]/g,'');">         <!-- вводим год -->
+    </label> 
+</div>
+<input type="button" onclick="enterTable()" value="Generate" id="generate">                                                                                    <!-- генерация календаря -->
+<div id="fiveTaskWrapper5">                                                                                                             <!-- div для календаря -->
+</div>
+<div id="invisiblMonth" style="display: none;"></div>
+<div id="invisiblYear" style="display: none;"></div>
+<script>
+    function calendar(enterYear, enterMonth) {
+        let month = enterMonth - 1;                                 //т.к. месяц в Date() = с 0 до 11
+        let enteredDate = new Date(enterYear, month);               //получаем 1 число нашей даты
+       
+        let dateTable = '<table class="table"><tr><th class="th">Sun</th><th class="th">Mon</th><th class="th">Tue</th><th class="th">Wed</th><th class="th">Thu</th><th class="th">Fri</th><th class="th">Sat</th></tr><tr class="tr">'; //переменная в которую мы будем заводить таблицу
+        let firstDayOfMonts = enteredDate.getDay()                   //находим в какой день недели будет первый день месяца
+        
+        for (let iDate = 1; iDate <= firstDayOfMonts; iDate++) {    //если месяц начинается не с воскресенья, 
+            dateTable += '<td  class="td"></td>';                               //то создаем пустые квадраты до 1 дня месяца
+        }
+        while (enteredDate.getMonth() == month) {                     //выводим дни месяца пока getMonth() == month
+            dateTable += '<td  class="td">' + enteredDate.getDate() + '</td>';      //создаем новые ячейки таблицы
+
+            if (enteredDate.getDay() % 7 == 6) {                         // если последний день суббота - переводим строку
+                dateTable += '</tr><tr>';
+            }
+            enteredDate.setDate(enteredDate.getDate() + 1);             //увеличиваем день на 1 день
+        }
+
+        if (enteredDate.getDay() != 6) {                                         //если необходимо, добавляем в таблицу пустые ячейки в конце месяца
+            for (let fillBySaturday = enteredDate.getDay(); fillBySaturday < 7; fillBySaturday++) {
+                dateTable += '<td  class="td"></td>';
+            }
+        }
+        dateTable += '</tr></table>';                                           //закрываем таблицу
+        let fiveTaskWrap = document.getElementById(`fiveTaskWrapper5`);         //выводим таблицу в html
+        fiveTaskWrap.innerHTML = dateTable;
+    }
+
+    function enterTable() {                                                     //функция ввода данных в таблицу
+    let mo = Number(document.getElementById("fiveTaskInput1").value);
+    let ye = Number(document.getElementById("fiveTaskInput2").value);
+    calendar(ye, mo);
+    }
+</script>
+
+
+<h3>
+Задание 6 <br>
+Создать html-страницу со списком ссылок.
+Ссылки на внешние источники (которые начинаются с http://)
+необходимо подчеркнуть пунктиром.
+Искать такие ссылки в списке и устанавливать им дополни-
+тельные стили необходимо с помощью JS.
+</h3>
+
+<ul>
+    <li><a id="link1" class="link" href="">index.html</a></li>
+    <li><a id="link2" class="link" href="">http://google.com</a></li>
+    <li><a id="link3" class="link" href="">http://itstep.org</a></li>
+    <li><a id="link4" class="link" href="">http://mystat.itstep.org</a></li>
+    <li><a id="link5" class="link" href="">/images/cat.jpg</a></li>
+    <li><a id="link6" class="link" href="">/local/path</a></li>
+</ul>
+
+<script>
+    const numberOfLinks = document.querySelectorAll('a.link').length;      //находим колличество ссылок в списке
+    for (let linkNumber = 1; linkNumber <= numberOfLinks; linkNumber++){
+        // let link = 
+        let linkNum = document.getElementById(`link${linkNumber}`);
+        let linkText = linkNum.textContent;
+        if (linkText.indexOf('http://') != -1) {
+            linkNum.style = 'border-bottom: dashed 1px black;' /* Добавляем свою линию */
+        }
+    }
+</script>
+
+<h3>
+Задание 7 <br>
+Создать html-страницу со списком книг.
+При щелчке на элемент, цвет текста должен меняться на оранжевый.
+При повторном щелчке на другую книгу, предыдущей –
+необходимо возвращать прежний цвет.
+Если при клике мышкой была зажата клавиша Ctrl, то элемент
+добавляется/удаляется из выделенных. Если при клике мышкой
+была зажата клавиша Shift, то к выделению добавляются все
+элементы в промежутке от предыдущего кликнутого до текущего.
+</h3>
+
+<ol id="book_ol">
+    <li class="li_book" id="book 1" onclick="chooseABook(event, 1)">книга 1 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 2" onclick="chooseABook(event, 2)">книга 2 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 3" onclick="chooseABook(event, 3)">книга 3 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 4" onclick="chooseABook(event, 4)">книга 4 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 5" onclick="chooseABook(event, 5)">книга 5 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 6" onclick="chooseABook(event, 6)">книга 6 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 7" onclick="chooseABook(event, 7)">книга 7 "Lorem ipsum dolor sit amet."</li>
+    <li class="li_book" id="book 8" onclick="chooseABook(event, 8)">книга 8 "Lorem ipsum dolor sit amet."</li>
+</ol>
+<script>
+    function chooseABook(e, number) {
+        if (event.ctrlKey) {
+            bookId = number;
+            let lineWithBook = document.getElementById(`book ${number}`);                   //получаем доступ к элементу с нужным id
+            let lineStyle = getComputedStyle(lineWithBook);                                 //обращаемся к стилям найденого элемента
+            if (lineStyle.backgroundColor == "rgb(255, 165, 0)") {                          //если оранжевый, 
+                lineWithBook.style = `background-color: inherit;`;                          //меняем  на цвет родителя
+            } else if (lineStyle.backgroundColor == "rgba(0, 0, 0, 0)") {                   //если цвет родителя,
+                        lineWithBook.style = `background-color: orange;`;                   //меняем на оранжевый
+                    }
+        } else if (event.shiftKey) {
+            let shiftKeyId = number;
+            let idArr = [];
+            idArr[0] = shiftKeyId;
+            idArr[1] = bookId;
+            let minId = Math.min(idArr[0], idArr[1]);
+            let maxId = Math.max(idArr[0], idArr[1]);
+            for (minId; minId <= maxId; minId++){
+            let shiftLineWithBook = document.getElementById(`book ${minId}`);
+            shiftLineWithBook.style = `background-color: orange;`;
+            }
+                } else {
+                    bookId = number;
+                    console.log(bookId);
+                    const numberOfLines = document.querySelectorAll('li.li_book');                //находим колличество строк книг в списке
+                        for (let i = 0; i < numberOfLines.length; i++) {                                    //каждой строке возвращаем цвет фона родительского элемента
+                            let takeEverything = document.getElementById(`book ${i+1}`);                    //получаем доступ к элементу с нужным id 
+                            takeEverything.style = `background-color: inherit;`;                            //меняем цвет выбраного элемента
+                        }        
+                    let takeEverything = document.getElementById(`book ${number}`);                     //получаем доступ к элементу с нужным id 
+                    takeEverything.style = `background-color: orange;`;                                 //меняем цвет выбраного элемента
+                }
+    }
+</script>
+
+
+<h3>
+Задание 8 <br>
+Создать html-страницу для отображения/редактирования текста.
+При открытии страницы текст отображается с помощью тега
+div. При нажатии Ctrl + E, вместо div появляется textarea с тем
+же текстом, который теперь можно редактировать. При нажатии
+Ctrl + S, вместо textarea появляет div с уже измененным текстом.
+Не забудьте выключить поведение по умолчанию для этих соче-
+таний клавиш.
+</h3>
+
+<div>
+    <div>
+        <p>Press Ctrl + E for edit text</p>
+        <p>Press Ctrl + S for save text</p>
+    </div>
+    <div id="div9exercise">text</div>
+    <textarea name="" onkeydown="textareaInput()" id="textarea9exercise" cols="30" rows="10"></textarea>
+</div>
+<script>
+    function textareaInput(){
+        document.getElementById('div9exercise').textContent = textarea9exercise.value;  //функция ввода текста из textarea в div
+    }
+
+    let dataInput = document.getElementById("textarea9exercise");           //доступ к textarea
+    let dataOutput = document.getElementById("div9exercise");               //доступ к div
+    document.body.onkeydown = hotKeys;                                      //функция для горячих клавиш
+    function hotKeys(e) {
+    if (e.ctrlKey && ((e.code === "KeyE") || (e.code === "KeyS"))) {        //отключаем поведение клавиш по умолчанию
+        e.preventDefault();
+        if (e.ctrlKey && (e.code === "KeyE")){                              //меняем стили блоков при нажатии комбинации клавиш Ctrl + E
+        dataInput.style = `display: block`;
+        dataOutput.style = `display: none`;
+        }
+        if (e.ctrlKey && (e.code === "KeyS")){                              //меняем стили блоков при нажатии комбинации клавиш Ctrl + S
+        dataInput.style = `display: none`;
+        dataOutput.style = `display: block`;
+        }
+    }
+}
+</script>
+
+
+<h3>
+    Задание 9 <br>
+    Создать html-страницу с большой таблицей.
+    При клике по заголовку колонки, необходимо отсортировать
+    данные по этой колонке. Например: на скриншоте люди отсоpтированы
+    по возрасту. Учтите, что числовые значения должны
+    сортироваться как числа, а не как строки.
+    </h3>
+    <table id="people">
+    
+    </table>
+    <script>
+        let famousPeople = [                              //создаем массив с данными таблицы
+            { Firstname: "Mark", Lastname: "Zuskerberg", Age: "34", Company: "Facebook" },
+            { Firstname: "Larry", Lastname: "Page", Age: "42", Company: "Google" },
+            { Firstname: "Timothy", Lastname: "Cook", Age: "57", Company: "Apple" },
+            { Firstname: "Bill", Lastname: "Gates", Age: "62", Company: "Microsoft" }
+        ];
+    
+        function generateTableHead(table, data) {           //функция создает 
+            let thead = table.createTHead();                //заголовок таблицы
+            let row = thead.insertRow();                    //и строки
+            let num = 0;                                    //вводим счетчик
+            for (let key of data) {                         //для всех ключей в строке
+                num = num + 1;                              //для каждого цикла счетчик прибавляет 1
+                let th = document.createElement("th");      //добавляем th
+                th.setAttribute('class', 'heading');        //добавляем class к ячейкам таблицы
+                th.setAttribute('id', `heading${num}`);     //добавляем id с номером
+                th.setAttribute('onclick','sort(event)');   //добавляем атрибут onclick, для запуска функции sort
+                let text = document.createTextNode(key);    //выводим ключи в названия заголовков
+                th.appendChild(text);                       //text - ребенок th
+                row.appendChild(th);                        //th - ребенок row
+            }
+        }
+        function generateTable(table, data) {                               //функция создает
+            for (let element of data) {                                     //для каждого элемента обьекта
+                let row = table.insertRow();                                //строку
+                    for (key in element) {                                  //по ключам
+                        let cell = row.insertCell();                        //вставляем <td> в <tr>
+                        cell.setAttribute('class', 'cellsTab')              //добавляем class к ячейкам таблицы
+                        let text = document.createTextNode(element[key]);   //заполняем <td> текстом
+                        cell.appendChild(text);                             //текст - ребенок <td>
+                    }
+            }
+        }
+    
+    let table = document.querySelector("table");        //вызываем функцию
+    let data = Object.keys(famousPeople[0]);            //выводим в заголовок массив из свойств обьекта famousPeople[0]
+    generateTable(table, famousPeople);                 //функцию вывода тела таблицы выводим первой, иначе данные запишутся в head таблицы
+    generateTableHead(table, data);
+        
+    function sort(e) {
+        let columnHeading=e.target.textContent                      //узнаем текстовое содержимое блока по которому кликаем
+        if (columnHeading == 'Age') {                                //если значение Age
+            famousPeople.sort((a, b) => (+a[columnHeading] > +b[columnHeading]) ? 1 : -1)  //производим сортировку по числам
+        } else { famousPeople.sort((a, b) => (a[columnHeading] > b[columnHeading]) ? 1 : -1)  //производим сортировку по строкам
+                }
+        let oldTable = document.getElementById("people");                   //находим таблицу
+        oldTable.removeChild(oldTable.getElementsByTagName("tbody")[0]);    //удаляем tbody
+        oldTable.removeChild(oldTable.getElementsByTagName("thead")[0]);    //удаляем thead
+        generateTable(table, famousPeople);                                    //выводим tbody
+        generateTableHead(table, data);                                     //выводим thead
+    }
+    </script> 
+</body>
+</html>

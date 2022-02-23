@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>Задание 4 <br>
+        Создать html-страницу с новостями.
+        Необходимо отлавливать, когда скролл доходит до конца страницы,
+        и догружать еще новости в список. Новости для подгрузки
+        хранить в заранее подготовленном массиве. <br> <br>
+        Облегченный вариант: вместо отлова, когда скролл дойдет до
+        конца страницы, используйте кнопку в конце списка новостей.</h3>
+    
+    <div id="fourTaskWrapper">
+    </div>
+<script>
+let news1 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news2 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news3 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news4 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news5 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news6 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news7 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news8 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news9 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+
+let news10 = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit quod ex nostrum. Temporibus praesentium repudiandae corporis enim magnam voluptatum, modi ea, illum, veniam eveniet debitis nostrum numquam animi sunt ut.' +
+            'Aut beatae nam exercitationem. Fuga eum recusandae eos, ex quis quae nihil voluptatibus repellat deleniti laborum cumque repudiandae quos mollitia at optio dolore aliquam veritatis possimus dolores excepturi et nam?' +
+            'Neque deleniti nulla cum debitis quaerat nostrum impedit laborum perspiciatis pariatur, doloribus atque vero inventore quisquam dolorum voluptatum? Quasi nostrum mollitia, eligendi ex distinctio numquam libero aut non cumque nobis.'
+let newsArr = [news1, news2, news3, news4, news5, news6, news7, news8, news9, news10]; 
+
+function createNews(number) {
+    let news = document.createElement('div');                       //создаем div для новости
+    news.setAttribute('class', 'news');                             //добавляем атрибуты class
+    news.setAttribute('id', `news${number}`);                       //и id
+    let h4 = document.createElement('h4');                          //создаем заголовок новости
+    h4.textContent = `Новость${number}`;                            //прописываем название заголовка
+    let br = document.createElement('br');                          //переход на следующуюстроку
+    let p = document.createElement('p');                            //создаем параграф для новости
+    p.textContent = newsArr[number - 1];                            //заполняем его новостью
+    news.append(h4, br, p);                                         //вставляем созданные элементы в div для новости
+    return news;
+}
+
+const parent = document.querySelector('#fourTaskWrapper');      //находим родительский элемент
+parent.appendChild(createNews(1));                              //новость1
+parent.appendChild(createNews(2));                              //новость2
+parent.appendChild(createNews(3));                              //новость3
+
+function addNews(){
+    let numberOfNews = document.querySelectorAll('div.news').length;
+    if (numberOfNews < newsArr.length) {
+    parent.appendChild(createNews(numberOfNews + 1));
+    }
+}
+
+onscroll = function(){                                          //функция добавления новости
+    let scrollHeight = Math.max(                                //В Math.max()функции возвращает наибольшее из нуля или более цифр , приведенных в качестве входных параметров, или , NaN если какой - либо параметр не является числом и не может быть преобразован в один.
+        // document.body.scrollHeight,             // измерение высоты содержимого элемента, включая содержимое, невидимое на экране из-за переполнения.
+        // document.documentElement.scrollHeight,  
+        // document.body.offsetHeight,             // возвращает высоту элемента, в том числе и вертикальной прокладки границ, в виде целого числа.
+        // document.documentElement.offsetHeight,  
+        document.body.clientHeight,             // можно рассчитать как: CSS height + CSS padding- высота горизонтальной полосы прокрутки (если она есть).
+        document.documentElement.clientHeight   
+    );
+    if(window.scrollY >= scrollHeight - innerHeight) addNews();
+};
+  </script>
+</body>
+</html>
